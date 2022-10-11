@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+#app {
+    font-family: poppins,Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    background-color: #E5E5E5;
+  }
+  
+
+.h-100{
+    min-height:100vh;
+}
+.h-100-60{
+    min-height:calc(100vh - 60px);
+}
+.login-card{
+    min-width: 200px;
+    max-width: 400px;
+    width: 100%;
+    background-color: #2F2E41;
+    border-radius: 5px;
+    color: #F4F4F4;
+}
+
+.form-control:focus{
+    box-shadow: none;
+    border: none;
+}
+
+.primary-bg{
+    background-color: #E5E5E5;
+}
+.secondary-bg{
+    background-color: #F4F4F4;
+}   
+
+.primary-btn{
+    background-color: #42b983;
+    border-color: #42b983;
+    color: #F4F4F4;
+}
+.primary-btn:hover{
+    background-color: #34996c;
+    border-color: #34996c;
+    color: #F4F4F4;
+}
+
+.primary-text{
+    color: #34996c;
+
+}
+.secondary-text{
+    color: #FCAB10;
+
+}
+
+
+/* header */
+.header-div{
+    height:60px;
+    background-color: #2F2E41;
+}
+.logo{
+    width: 50px;
+}
+.full-logo{
+    width: 150px;
+}
+.header-link{
+    color: #F4F4F4;
+    text-decoration: none;
+    padding:10px;
+    border-radius: 5px;
+    font-weight: 500;
+
+}
+.header-link:hover{
+    color: #F4F4F4;
+    text-decoration: none;
+    background-color:#34996cb3;
+
+}
+.header-link.router-link-active{
+    color: #F4F4F4;
+    text-decoration: none;
+    background-color:#34996cb3;
+
+}
+.small-header{
+    max-width: 90vw;
+    border-bottom-left-radius:5px ;
+    border-bottom-right-radius:5px ;
+}
+
+
+
+
+/* projects */
+.project-card{
+    width: 150px;
+    height: 150px;
+    background: #F4F4F4;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.project-card:hover{
+    background: rgb(231, 231, 231);
+}
