@@ -17,7 +17,7 @@
         </div>
         
         <div class="d-flex">
-            <ProjectCard v-for="p in projects" :key="p.id" :name="p.name" :id="p.id" @remove-project="removeProject"/>
+            <ProjectCard v-for="p in projects" :key="p.id" :user-id="p.user_id" :name="p.name" :id="p.id" @remove-project="removeProject"/>
         </div>
     </MainWrapper>
 </template>

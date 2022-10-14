@@ -1,12 +1,12 @@
 <template>
 
-    <div class="position-relative">
+    <div class="position-relative" >
         <p ref="menu" class="menu-btn my-auto" @click="openClose">
             <i class="fa-solid fa-gear"></i>
         </p>
         <!-- <button class="dropDownMenuButton btn btn-primary" ref="menu" @click="openClose"> <i class="fa-solid fa-gear"></i></button> -->
 
-        <section class="dropdownMenu position-absolute" v-if="isOpen">
+        <section class="dropdownMenu position-absolute" v-if="isOpen" @focusout="focusOut" tabindex="0">
             <div class="menuArrow" />
             <DropdownItem v-for="item in menuItems" :key="item.text" :text="item.text" :icon="item.icon" :action="item.action"/>
         </section>
@@ -58,6 +58,10 @@
             if( this.isOpen && dropdown != event.target )
                 return true
 
+        },
+        focusout(){
+          console.log("focusout")
+          this.isOpen = false
         }
 
     }

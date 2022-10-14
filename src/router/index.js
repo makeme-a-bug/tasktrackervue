@@ -45,6 +45,20 @@ const routes = [
     },
   },
   {
+    path: "/projects/edit/:id",
+    name: "edit_projects",
+    component: AddProjectView,
+    props: true,
+    beforeEnter: (to, from) => {
+      console.log(store.user)
+      if (!!store.user){
+        return true
+      }
+      router.push("/login")
+      return false
+    },
+  },
+  {
     path: "/me",
     name: "account",
     component: AccountView,

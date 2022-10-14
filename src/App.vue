@@ -11,8 +11,13 @@ import { supabase } from './supabaseClient'
 export default {
     setup() {
       supabase.auth.onAuthStateChange((event, session) => {
-        console.log(session.user,'store',event)
-        store.user = session.user
+        if(!!session){
+          store.user = session.user
+        }
+        else{
+          store.user = null
+        }
+        console.log(event)
       })
 
       return {

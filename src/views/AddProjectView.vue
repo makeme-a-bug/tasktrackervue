@@ -10,7 +10,8 @@
                     <label for=""> description </label>
                     <input type="text" value="" placeholder="Enter the name of the project">
                 </div> -->
-                <button class="btn btn-primary primary-btn w-100 mt-4" @click="submit"> <i class="fa-solid fa-plus"></i> Add </button>
+                <button v-if="id" class="btn btn-primary primary-btn w-100 mt-4" @click="update"> Update </button>
+                <button v-else class="btn btn-primary primary-btn w-100 mt-4" @click="submit"> <i class="fa-solid fa-plus"></i> Add </button>
             </form>
         </div>
     </MainWrapper>
@@ -31,11 +32,17 @@ export default{
             user:store.user
         }
     },
+    props:{
+        id:String
+    },
     components:{
         MainWrapper
     },
     mounted(){
-        
+        if(!!this.id){
+            console.log(this.id)
+            this.getProject()
+        }
     },
     methods:{
         async submit(e){
@@ -60,6 +67,51 @@ export default{
             
             console.log(this.name)
         },
+
+        async update(e){
+            e.preventDefault()
+            Notiflix.Block.arrows("#project_form")
+            try{
+                const { error } = await supabase
+                .from('project')
+                .update({name: this.name }).eq("id",this.id)
+
+                if (error) throw error
+                
+                router.push('/projects')
+
+            }
+            catch (error){
+                alert(error.error_description || error.message)
+            }
+            finally{
+                Notiflix.Block.remove("#project_form")
+            }
+            
+            console.log(this.name)
+        },
+
+        async getProject(){
+            Notiflix.Block.arrows("#project_form")
+            try{
+                const { data , error } = await supabase
+                .from('project').select().eq("id",this.id)
+                
+
+                if (error) throw error
+                
+                this.name = data[0].name
+
+            }
+            catch (error){
+                alert(error.error_description || error.message)
+            }
+            finally{
+                Notiflix.Block.remove("#project_form")
+            }
+        },
+
+
     }
 }
 
