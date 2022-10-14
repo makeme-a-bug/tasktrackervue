@@ -4,6 +4,8 @@ import LoginView from "../views/LoginView.vue";
 import ProjectsView from "../views/ProjectsView.vue";
 import AddProjectView from "../views/AddProjectView.vue";
 import AccountView from "../views/AccountView.vue";
+import ProjectMainView from "../views/ProjectMainView.vue";
+import ProjectMain from "../components/ProjectMain";
 import { supabase } from '../supabaseClient'
 import { store } from '../store'
 
@@ -58,6 +60,35 @@ const routes = [
       return false
     },
   },
+  ,
+  {
+    path: "/project/:id",
+    name: "project",
+    component: ProjectMain,
+    props: true,
+    beforeEnter: (to, from) => {
+      console.log(store.user)
+      if (!!store.user){
+        return true
+      }
+      router.push("/login")
+      return false
+    },
+    children: [
+      {
+        // UserProfile will be rendered inside User's <router-view>
+        // when /user/:id/profile is matched
+        path: '',
+        component: ProjectMainView,
+      },
+      // {
+      //   // UserPosts will be rendered inside User's <router-view>
+      //   // when /user/:id/posts is matched
+      //   path: 'posts',
+      //   component: UserPosts,
+      // },
+    ],
+  },
   {
     path: "/me",
     name: "account",
@@ -69,17 +100,8 @@ const routes = [
       router.push("/login")
       return false
     },
+
   },
-  // {
-  //   path: "/about",
-  //   name: "about",
-    
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  // },
 ];
 
 const router = createRouter({

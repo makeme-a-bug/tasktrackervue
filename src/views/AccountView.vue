@@ -52,11 +52,12 @@ import { supabase } from '../supabaseClient'
 import MainWrapper from '../components/MainWrapper'
 import router from "../router";
 import Notiflix from 'notiflix';
+import {store} from '../store'
 
 export default {
     data(){
         return{
-            user : {},
+            user : store.user,
             fist_name:'',
             last_name:'',
             loader:null,
@@ -66,27 +67,9 @@ export default {
     MainWrapper
     },
     mounted(){
-        this.getUser()
+        this.getProfile()
     },
     methods:{
-        getUser(){
-            try{
-               const user  = supabase.auth.user()
-               
-               if(!!!user) throw {message:"You might be logged out"}
-            
-                this.user = user
-                this.getProfile()
-               
-            }
-            catch (error){
-                alert(error.error_description|| error.message)
-            }
-            finally{
-
-            }
-        }
-        ,
         async getProfile(){
             try{
                const { data, error } = await supabase
@@ -117,11 +100,10 @@ export default {
                 .from('profile')
                 .update({ first_name: this.first_name ,last_name: this.last_name})
                 .match({ user_id: this.user.id })
-               
+
                if(error) throw error
             
-                this.profile = data[0]
-                console.log(data)
+                
                 Notiflix.Notify.success("Profile updated" , {
                     position : "right-bottom"
                 })

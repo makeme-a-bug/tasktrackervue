@@ -88,7 +88,6 @@ export default{
                 Notiflix.Block.remove("#project_form")
             }
             
-            console.log(this.name)
         },
 
         async getProject(){

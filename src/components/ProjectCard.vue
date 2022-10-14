@@ -33,7 +33,7 @@ export default {
     },
     methods:{
         goto(){
-            console.log(this.id)
+            router.push(`/project/${this.id}`)
         },
         conformDelete(e){
             e.stopPropagation()
@@ -64,7 +64,8 @@ export default {
             }
             
         },
-        editProject(){
+        editProject(e){
+            e.stopPropagation()
             router.push(`/projects/edit/${this.id}`)
         }
     }
