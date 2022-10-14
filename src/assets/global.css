@@ -26,7 +26,7 @@
 
 .form-control:focus{
     box-shadow: none;
-    border: none;
+    /* border: none; */
 }
 
 .primary-bg{
@@ -46,6 +46,19 @@
     border-color: #34996c;
     color: #F4F4F4;
 }
+
+.secondary-btn{
+    background-color: #FCAB10;
+    border-color: #FCAB10;
+    color: #F4F4F4;
+}
+.secondary-btn:hover{
+    background-color: #e99904;
+    border-color: #e99904;
+    color: #F4F4F4;
+}
+
+
 
 .primary-text{
     color: #34996c;

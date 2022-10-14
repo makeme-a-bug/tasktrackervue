@@ -1,5 +1,5 @@
 <template class="primary-bg">
-    <div class="d-flex justify-content-between align-items-center header-div px-2" v-if="loggedIn">
+    <div class="d-flex justify-content-between align-items-center header-div px-3" v-if="loggedIn">
         <div class="nav-start">
             <img  class="logo" src="https://ffjwvmpxsrgtbegincmd.supabase.co/storage/v1/object/sign/planit/logo.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwbGFuaXQvbG9nby5zdmciLCJpYXQiOjE2NjUzMzk2NzksImV4cCI6MTk4MDY5OTY3OX0.m9e8r7FkxQiKR5y_KTmw7QObcMsjTeWrdcHzJGl_KyY" alt="">
         </div>
@@ -33,6 +33,7 @@
 import { supabase } from '../supabaseClient'
 import router from "../router";
 import DropdownMenu from '../components/DropdownMenu.vue'
+import {store} from '../store'
 
 export default{
     data(){
@@ -53,22 +54,28 @@ export default{
        DropdownMenu 
     },
     mounted(){
-        const user = supabase.auth.user()
-        if (!!user){
+        
+        if (!!store.user){
             this.loggedIn = true
         }
+
     },
     methods:{
         async logout(){
             try{
-                const { error } = await supabase.auth.signOut()
+
+                const { user } = await supabase.auth.getUser()
+                console.log(user)
+                let { error } = await supabase.auth.signOut()
+                console.log(error,'header')
                 if (error) throw error
 
                 router.push('/login')
             }
-            catch{
+            catch (error){
                 if('message' in error){
-                    alert(message)
+                    console.log("error in header")
+                    alert(error.message)
                 }
                 else{
                     alert(error.error_description)
@@ -78,7 +85,7 @@ export default{
 
             }
 
-        }
+        },
     }
 }
 </script>

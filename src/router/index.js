@@ -2,8 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
 import ProjectsView from "../views/ProjectsView.vue";
+import AddProjectView from "../views/AddProjectView.vue";
 import AccountView from "../views/AccountView.vue";
 import { supabase } from '../supabaseClient'
+import { store } from '../store'
 
 const routes = [
   {
@@ -21,8 +23,21 @@ const routes = [
     name: "projects",
     component: ProjectsView,
     beforeEnter: (to, from) => {
-      const user = supabase.auth.user()
-      if (!!user){
+      if (!!store.user){
+        return true
+      }
+      router.push("/login")
+      return false
+    },
+  },
+  ,
+  {
+    path: "/projects/add",
+    name: "add_projects",
+    component: AddProjectView,
+    beforeEnter: (to, from) => {
+      console.log(store.user)
+      if (!!store.user){
         return true
       }
       router.push("/login")
@@ -34,8 +49,7 @@ const routes = [
     name: "account",
     component: AccountView,
     beforeEnter: (to, from) => {
-      const user = supabase.auth.user()
-      if (!!user){
+      if (!!store.user){
         return true
       }
       router.push("/login")

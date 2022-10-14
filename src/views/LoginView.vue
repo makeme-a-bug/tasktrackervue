@@ -54,14 +54,19 @@ export default {
         console.log(this.email,this.password)
         try{
             this.loader = true
-            const { user, session, error } = await supabase.auth.signIn({
+            const { data ,  error } = await supabase.auth.signInWithPassword({
             email: this.email,
             password: this.password,
             })
 
+            const{user,error2} = await supabase.auth.getUser()
+
+            console.log(user,error2)
+
             if (error) throw error
 
-            console.log(session,user)
+
+            console.log(data)
             router.push(`/projects`)
 
         }
