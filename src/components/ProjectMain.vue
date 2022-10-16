@@ -25,6 +25,9 @@
                 <router-link :to="`/project/${id}/roles`" class="text-start mt-2 link">
                     <i className="fa-solid fa-ribbon mx-2"></i> Roles
                 </router-link>
+                <router-link :to="`/project/${id}/statuses`" class="text-start mt-2 link">
+                    <i className="fa-solid fa-ribbon mx-2"></i> Statuses
+                </router-link>
             </div>
             <div class="section mt-3 w-100 d-flex justify-content-between align-items-center flex-column pb-3">
                 <router-link :to="`/project/${id}/notifications`" class="text-start mt-2 link">

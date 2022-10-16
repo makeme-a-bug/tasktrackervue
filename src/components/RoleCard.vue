@@ -1,5 +1,6 @@
 <template>
-    <div class="role-card d-flex justify-content-center secondary-bg align-items-center flex-column rounded shadow me-3">
+    <div class="role-card d-flex justify-content-center secondary-bg align-items-center flex-column rounded shadow me-3 position-relative">
+        <i class="fa-solid fa-trash delete text-danger action" @click="deleteRole"></i>
         <div class="profile-img rounded-circle d-flex align-items-center justify-content-center mb-2" :style="`background-color:${role.color}`">
             <i class="fa-solid fa-ribbon" ></i>
         </div>
@@ -9,15 +10,41 @@
 
 
 <script>
+import { supabase } from '../supabaseClient'
+import Notiflix from 'notiflix';
 
 
 export default{
+    data(){
+        return{
+            permissions:[]
+        }
+    },
     props:{
         role:Object
     },
     methods:{
         openForm(){
             this.$emit("openForm",null,this.role.id)
+        },
+        async deleteRole(){
+            try{
+                const {data, error} = await supabase.from("role").delete().eq("id",this.role.id)
+
+                if (error) throw error
+
+                this.$emit("roleDelete",this.role.id)
+
+                Notiflix.Notify.success("Role deleted")
+            }
+            catch(error){
+                console.log(error.message || error.error_description)
+                Notiflix.Notify.success("Role not deleted")
+
+            }
+            finally{
+
+            }
         }
     }
 }
@@ -52,6 +79,16 @@ export default{
     color: white;
     width: 80px;
     height: 80px;
+}
+
+.delete{
+    position: absolute;
+    top:10px;
+    right: 10px;
+}
+
+.permission-text{
+    font-size:11px;
 }
 
 </style>

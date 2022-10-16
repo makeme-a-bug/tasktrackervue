@@ -1,5 +1,12 @@
 <template>
-    <h4 class="w-100 text-start fw-bold"> Members</h4>
+    <div class="d-flex flex-wrap justify-content-between align-items-center my-2">
+    <div class="d-flex flex-nowrap align-items-center">
+        <h4 class="text-start fw-bold m-0"> Members </h4>
+        <button class="btn btn-primary primary-btn ms-2 rounded-pill btn-sm">
+            <i className="fa-solid fa-plus me-1"></i> Inivite member
+        </button>
+    </div>
+    </div>
     <div class="d-flex flex-wrap justify-content-start align-items-start mt-2">
         <MemberCard v-for="m in data" :key="m.id" :member="m">
 
