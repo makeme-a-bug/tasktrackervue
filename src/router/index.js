@@ -5,6 +5,8 @@ import ProjectsView from "../views/ProjectsView.vue";
 import AddProjectView from "../views/AddProjectView.vue";
 import AccountView from "../views/AccountView.vue";
 import ProjectMainView from "../views/ProjectMainView.vue";
+import ProjectMemberView from "../views/ProjectMemberView.vue";
+import ProjectRoleView from "../views/ProjectRoleView.vue";
 import ProjectMain from "../components/ProjectMain";
 import { supabase } from '../supabaseClient'
 import { store } from '../store'
@@ -79,14 +81,24 @@ const routes = [
         // UserProfile will be rendered inside User's <router-view>
         // when /user/:id/profile is matched
         path: '',
+        props:true,
         component: ProjectMainView,
       },
-      // {
-      //   // UserPosts will be rendered inside User's <router-view>
-      //   // when /user/:id/posts is matched
-      //   path: 'posts',
-      //   component: UserPosts,
-      // },
+      {
+        // UserPosts will be rendered inside User's <router-view>
+        // when /user/:id/posts is matched
+        path: 'members',
+        props:true,
+        component: ProjectMemberView,
+      },
+      
+      {
+        // UserPosts will be rendered inside User's <router-view>
+        // when /user/:id/posts is matched
+        path: 'roles',
+        props:true,
+        component: ProjectRoleView,
+      },
     ],
   },
   {

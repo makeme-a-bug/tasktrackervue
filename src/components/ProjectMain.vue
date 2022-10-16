@@ -11,7 +11,7 @@
                 <button class="btn btn-primary btn-sm primary-btn rounded-pill me-auto ms-3 px-3">
                     <i className="fa-solid fa-plus me-1"></i> Create Task
                 </button>
-                <router-link :to="`/project/${id}`" class="text-start mt-3 link">
+                <router-link :to="`/project/${id}`" class="text-start mt-3 link" exact>
                     <i className="fa-solid fa-house-chimney-window mx-2"></i> Main project
                 </router-link>
                 <router-link :to="`/project/${id}/myTasks`" class="text-start mt-2 link">
@@ -27,7 +27,7 @@
                 </router-link>
             </div>
             <div class="section mt-3 w-100 d-flex justify-content-between align-items-center flex-column pb-3">
-                <router-link :to="`/project/${id}/members`" class="text-start mt-2 link">
+                <router-link :to="`/project/${id}/notifications`" class="text-start mt-2 link">
                     <i className="fa-solid fa-bell mx-2"></i> Notifications
                 </router-link>
                 <router-link :to="`/project/${id}/roles`" class="text-start mt-2 link">
