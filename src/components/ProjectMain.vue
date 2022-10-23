@@ -99,6 +99,7 @@ export default {
 <style scoped>
 .side-bar{
     max-width: 200px;
+    min-width: 200px;
     width:100%;
     border-right:1px solid #80808045;
     background: #F4F4F4;

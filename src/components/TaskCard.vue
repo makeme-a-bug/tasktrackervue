@@ -1,7 +1,7 @@
 <template>
     <div class='w-100 d-flex flex-column shadow-sm rounded p-3 task mt-2'>
         <div class="d-flex justify-content-between align-items-center">
-            <label for="" class="sm-badge rounded px-2 py-1"> {{task.id}} </label>
+            <label for="" class="sm-badge rounded px-2 py-1 text-truncate"> {{task.id}} </label>
             <div class="color-bulb rounded-circle" :style="`background-color:${status.color}`">
             </div>
         </div>
@@ -10,7 +10,7 @@
             {{task.description}}
         </p>
         <div class="d-flex justify-content-start align-items-center mt-2">
-            <label for="" class="sm-badge rounded px-2 py-1"> {{task.created_on}} </label>
+            <label for="" class="sm-badge rounded px-2 py-1"> {{new Date(task.created_at).toLocaleDateString("en-US", options)}} </label>
             
         </div>
         <hr>
@@ -22,9 +22,20 @@
 <script>
 
 export default {
+    data(){
+        return{
+            options : {  year: 'numeric', month: 'short', day: 'numeric' }
+        }
+    },
     props:{
         task:Object,
         status:Object,
+    },
+    mounted(){
+
+    },
+    methods:{
+        
     }
 }
 </script>
@@ -41,6 +52,7 @@ export default {
     color:#777777;
     font-size: 14px;
     font-weight:500;
+    max-width: 150px;
 }
 
 .color-bulb{

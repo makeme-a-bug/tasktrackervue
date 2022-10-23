@@ -1,5 +1,5 @@
 <template>
-    <div class="h-100-70 task-cont rounded me-3 p-2 d-flex flex-column">
+    <div class="h-100-70 task-cont rounded me-3 p-2 d-flex flex-column" :draggable="dragable" >
         <div class="d-flex  justify-content-between align-items-center w-100">
         <div class="d-flex align-items-center">
         <p class="fw-bold text-capitalize text-start m-0 me-2">
@@ -27,7 +27,8 @@ export default {
     props:{
         tasks:Array,
         status:Object,
-        demo:Boolean
+        demo:Boolean,
+        dragable:Boolean,
     },
     components:{
         TaskCard 
@@ -64,10 +65,10 @@ export default {
 
 .task-cont{
     max-width: 450px;
-    min-width: 250px;
+    min-width: 350px;
     width: 100%;
     border:1px solid #80808045;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 200px);
     background: #F4F4F4;
 }
 
