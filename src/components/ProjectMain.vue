@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="section mt-3 w-100 d-flex justify-content-between align-items-center flex-column pb-3">
-                <button class="btn btn-primary btn-sm primary-btn rounded-pill me-auto ms-3 px-3">
+                <button class="btn btn-primary btn-sm primary-btn rounded-pill me-auto ms-3 px-3" @click="toggleForm">
                     <i className="fa-solid fa-plus me-1"></i> Create Task
                 </button>
                 <router-link :to="`/project/${id}`" class="text-start mt-3 link" exact>
@@ -43,8 +43,9 @@
             
         </div>
         <div class="main-content h-100-60 p-2">
-            <router-view />
+            <router-view @open-task-form="toggleForm"/>
         </div>
+        <TaskForm @close="toggleForm" v-if="openForm" :project-id="id" :statuses="statuses"/>
     </MainWrapper>
 </template>
 
@@ -53,11 +54,15 @@ import MainWrapper from './MainWrapper.vue'
 import Notiflix from 'notiflix';
 import {store} from '../store'
 import { supabase } from '../supabaseClient'
+import TaskForm from './TaskForm'
 
 export default {
     data(){
         return{
             project:null,
+            taskId:null,
+            openForm:false,
+            statuses:[],
         }
     },
     props: {
@@ -65,11 +70,33 @@ export default {
     },
     mounted(){
         this.getProject()
+        this.getStatus()
     },
     components:{
-        MainWrapper
+        MainWrapper,
+        TaskForm
     },
     methods:{
+        toggleForm(e,id=''){
+            this.taskId=id
+            this.openForm = !this.openForm
+        },
+        async getStatus(){
+            try{
+                const { data , error } = await supabase
+                .from('status').select().eq("project_id",this.id)
+                
+                if (error) throw error
+                
+                this.statuses = data
+
+            }
+            catch (error){
+                alert(error.error_description || error.message)
+            }
+            finally{
+            }
+        },
         async getProject(){
             Notiflix.Block.arrows("#side_bar")
             try{

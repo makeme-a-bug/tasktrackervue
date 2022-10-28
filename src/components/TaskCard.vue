@@ -1,5 +1,5 @@
 <template>
-    <div class='w-100 d-flex flex-column shadow-sm rounded p-3 task mt-2'>
+    <div class='w-100 d-flex flex-column shadow-sm rounded p-3 task mt-2' draggable="true">
         <div class="d-flex justify-content-between align-items-center">
             <label for="" class="sm-badge rounded px-2 py-1 text-truncate"> {{task.id}} </label>
             <div class="color-bulb rounded-circle" :style="`background-color:${status.color}`">

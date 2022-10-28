@@ -28,7 +28,8 @@ const routes = [
     name: "projects",
     component: ProjectsView,
     beforeEnter: (to, from) => {
-      if (!!store.user){
+      // console.log(!!store.user,store.user.keys)
+      if (Object.keys(store.user).length !== 0){ // use this condition in other as well its more constant
         return true
       }
       router.push("/login")

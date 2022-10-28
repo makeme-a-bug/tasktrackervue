@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-wrap justify-content-between align-items-center my-2">
         <div class="d-flex flex-nowrap align-items-center">
-            <h4 class="text-start fw-bold m-0"> Main </h4>
+            <h4 class="text-start fw-bold m-0" @click="openTaskForm"> Main </h4>
             <!-- <button class="btn btn-primary primary-btn ms-2 rounded-pill btn-sm" @click="toggleStatusForm">
                 <i className="fa-solid fa-plus me-1"></i> Add Status
             </button> -->
@@ -38,8 +38,12 @@ export default{
         this.getStatuses()
         this.getTasks()
     },
-
+    emits:['openTaskForm'],
     methods:{
+        openTaskForm(){
+            console.log("open")
+            this.$emit("openTaskForm")
+        },
         async getStatuses(){
             try{
                 const{data , error} =await supabase.from('status').select().eq('project_id',this.id)
